@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Job Management Admin</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <!-- Navbar -->
+      <nav class="navbar-exact">
+        <div class="navbar-content">
+          <div class="nav-logo">
+            <img src="logos/logo.png" alt="Logo" class="logo-img" />
+          </div>
+          <div class="nav-links">
+            <a href="#" class="nav-link active">Home</a>
+            <a href="#" class="nav-link">Find Jobs</a>
+            <a href="#" class="nav-link">Find Talents</a>
+            <a href="#" class="nav-link">About us</a>
+            <a href="#" class="nav-link">Testimonials</a>
+          </div>
+          <button class="create-job-btn" id="create-job-btn">
+            Create Jobs
+          </button>
+        </div>
+      </nav>
+
+      <!-- Main Content -->
+      <div class="main-content">
+        <!-- Job List View -->
+        <div id="job-list-view" class="view active-view">
+          <div class="filter-container">
+            <div class="filter-row">
+              <div class="filter-group">
+                <img class="search-logo" src="logos/search.png" alt="Search" />
+                <input
+                  type="text"
+                  id="job-search"
+                  placeholder="Search By Job Title, Role"
+                />
+              </div>
+
+              <div class="filter-group location-filter">
+                <img class="loc" src="logos/Location.png" alt="Location" />
+                <input
+                  class="pref"
+                  type="text"
+                  id="location-search"
+                  placeholder="Preferred Location"
+                  readonly
+                />
+                <div class="location-options">
+                  <div class="location-option" data-value="Chennai">
+                    Chennai
+                  </div>
+                  <div class="location-option" data-value="Bangalore">
+                    Bangalore
+                  </div>
+                  <div class="location-option" data-value="Delhi">Delhi</div>
+                  <div class="location-option" data-value="Hyderabad">
+                    Hyderabad
+                  </div>
+                  <div class="location-option" data-value="Mumbai">Mumbai</div>
+                  <div class="location-option" data-value="Pune">Pune</div>
+                </div>
+              </div>
+
+              <div class="filter-group">
+                <img class="job-logo" src="logos/job-type.png" alt="Job Type" />
+                <select id="job-type-filter">
+                  <option value="">Job Type</option>
+                  <option value="FullTime">Full-time</option>
+                  <option value="PartTime">Part-time</option>
+                  <option value="Contract">Contract</option>
+                  <option value="Internship">Internship</option>
+                </select>
+              </div>
+
+              <div class="salary-slider-container">
+                <p class="salary-per-month">Salary per Month</p>
+                <input
+                  type="range"
+                  id="salary-range"
+                  min="0"
+                  max="500000"
+                  step="10000"
+                  value="500000"
+                />
+                <div class="slider-labels">
+                  <span>0</span>
+                  <span>500k</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="jobs-grid" class="jobs-grid">
+            <!-- Jobs will be inserted here by JavaScript -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Overlay -->
+      <div id="modal-overlay" class="modal-overlay">
+        <div class="modal-content">
+          <div class="create-job-exact">
+            <div class="create-job-header">
+              <h1>Create Job Opening</h1>
+              <button class="close-modal">&times;</button>
+            </div>
+
+            <form id="create-job-form">
+              <div class="form-columns">
+                <div class="form-column">
+                  <div class="form-group">
+                    <label for="job-title">Job Title</label>
+                    <input
+                      type="text"
+                      id="job-title"
+                      placeholder="Full Stack Developer"
+                      required
+                    />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="job-location">Location</label>
+                    <select id="job-location" required>
+                      <option value="">Select Location</option>
+                      <option value="Chennai">Chennai</option>
+                      <option value="Bangalore">Bangalore</option>
+                      <option value="Delhi">Delhi</option>
+                      <option value="Hyderabad">Hyderabad</option>
+                      <option value="Mumbai">Mumbai</option>
+                      <option value="Pune">Pune</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label>Salary Range (per month)</label>
+                    <div class="salary-inputs">
+                      <input
+                        type="number"
+                        id="salary-min"
+                        placeholder="Min"
+                        min="0"
+                      />
+                      <span>-</span>
+                      <input
+                        type="number"
+                        id="salary-max"
+                        placeholder="Max"
+                        min="0"
+                      />
+                      <span>p/m</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-column">
+                  <div class="form-group">
+                    <label for="company-name">Company Name</label>
+                    <select id="company-name" required>
+                      <option value="">Select Company</option>
+                      <option value="Amazon">Amazon</option>
+                      <option value="Microsoft">Microsoft</option>
+                      <option value="Swiggy">Swiggy</option>
+                      <option value="Google">Google</option>
+                      <option value="Netflix">Netflix</option>
+                      <option value="Uber">Uber</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="job-type">Job Type</label>
+                    <select id="job-type" required>
+                      <option value="FullTime">Full-time</option>
+                      <option value="PartTime">Part-time</option>
+                      <option value="Contract">Contract</option>
+                      <option value="Internship">Internship</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="application-deadline"
+                      >Application Deadline</label
+                    >
+                    <input
+                      type="date"
+                      id="application-deadline"
+                      min="${new Date().toISOString().split('T')[0]}"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group full-width">
+                <label for="job-description">Job Description</label>
+                <textarea
+                  id="job-description"
+                  placeholder="Please share a description to let the candidate know more about the job role"
+                  required
+                ></textarea>
+              </div>
+
+              <div class="form-actions">
+                <button
+                  type="button"
+                  id="save-draft-btn"
+                  class="save-draft-btn"
+                >
+                  Save Draft
+                </button>
+                <button type="submit" class="publish-btn">Publish</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>
