@@ -1,6 +1,6 @@
 // Job Management Application - Pure JavaScript Implementation
 
-// Sample initial jobs data (6 jobs)
+// Sample initial jobs data (8 jobs)
 const initialJobs = [
   {
     id: 1,
@@ -11,7 +11,7 @@ const initialJobs = [
     salaryMin: 50000,
     salaryMax: 80000,
     description:
-      'A user-friendly interface lets you browse stunning photos and videos. Filter destinations based on time, travel style, and create personalized experiences.',
+      'Develop and maintain web applications using modern frameworks. Work with cross-functional teams to deliver high-quality software solutions.',
     deadline: '2023-12-31',
     createdAt: new Date(Date.now() - 86400000), // 24 hours ago
   },
@@ -24,7 +24,7 @@ const initialJobs = [
     salaryMin: 60000,
     salaryMax: 90000,
     description:
-      'Icarily interfaces lets you browse photos and videos for the first time and to find creative personalized solutions.',
+      'Build responsive and accessible user interfaces using React. Collaborate with designers to implement pixel-perfect UIs.',
     deadline: '2023-11-30',
     createdAt: new Date(Date.now() - 172800000), // 48 hours ago
   },
@@ -37,7 +37,7 @@ const initialJobs = [
     salaryMin: 70000,
     salaryMax: 100000,
     description:
-      'Looking for a backend developer to work on our high-traffic food delivery platform.',
+      'Design and implement scalable backend services for our food delivery platform. Optimize database queries and API performance.',
     deadline: '2024-01-15',
     createdAt: new Date(Date.now() - 3600000), // 1 hour ago
   },
@@ -50,7 +50,7 @@ const initialJobs = [
     salaryMin: 55000,
     salaryMax: 85000,
     description:
-      'Design beautiful interfaces that users love. Work with product teams to create intuitive experiences.',
+      'Create user-centered designs by understanding business requirements and user feedback. Develop wireframes and prototypes.',
     deadline: '2023-12-15',
     createdAt: new Date(Date.now() - 43200000), // 12 hours ago
   },
@@ -63,7 +63,7 @@ const initialJobs = [
     salaryMin: 80000,
     salaryMax: 120000,
     description:
-      'Build and maintain our cloud infrastructure to ensure high availability and scalability.',
+      'Implement CI/CD pipelines and automate infrastructure provisioning. Monitor system performance and troubleshoot issues.',
     deadline: '2024-02-28',
     createdAt: new Date(Date.now() - 7200000), // 2 hours ago
   },
@@ -76,9 +76,35 @@ const initialJobs = [
     salaryMin: 45000,
     salaryMax: 70000,
     description:
-      'Analyze large datasets to extract insights and help drive business decisions.',
+      'Analyze large datasets to extract business insights. Build machine learning models to improve our services.',
     deadline: '2023-12-10',
     createdAt: new Date(Date.now() - 28800000), // 8 hours ago
+  },
+  {
+    id: 7,
+    title: 'Software Development Engineer II',
+    company: 'Amazon',
+    location: 'Bangalore',
+    jobType: 'FullTime',
+    salaryMin: 90000,
+    salaryMax: 130000,
+    description:
+      'Lead the design and implementation of complex systems. Mentor junior engineers and drive technical excellence.',
+    deadline: '2024-03-20',
+    createdAt: new Date(Date.now() - 14400000), // 4 hours ago
+  },
+  {
+    id: 8,
+    title: 'Product Manager - Delivery Experience',
+    company: 'Swiggy',
+    location: 'Bangalore',
+    jobType: 'FullTime',
+    salaryMin: 85000,
+    salaryMax: 110000,
+    description:
+      'Own the end-to-end delivery experience for customers. Work with engineering and design to build innovative features.',
+    deadline: '2024-01-31',
+    createdAt: new Date(Date.now() - 21600000), // 6 hours ago
   },
 ];
 
@@ -111,13 +137,22 @@ function init() {
   setupEventListeners();
   updateActiveNavLink();
   updateSalaryLabel();
-
-  // Setup location dropdown
   setupLocationDropdown();
 }
 
 // Load jobs from localStorage or use initial data
 function loadJobs() {
+  // For deployed version, always use initialJobs
+  if (
+    window.location.hostname !== 'localhost' &&
+    window.location.hostname !== '127.0.0.1'
+  ) {
+    state.jobs = initialJobs;
+    saveJobs(); // Save them to localStorage
+    return;
+  }
+
+  // For local development, use saved jobs or initial data
   const savedJobs = localStorage.getItem('jobs');
   state.jobs = savedJobs ? JSON.parse(savedJobs) : initialJobs;
 }
